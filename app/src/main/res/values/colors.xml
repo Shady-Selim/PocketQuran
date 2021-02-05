@@ -1,0 +1,10 @@
+<resources>
+    <color name="colorPrimaryDark">#5D4037</color>
+    <color name="colorPrimary">#795548</color>
+    <color name="black_overlay">#212121</color>
+    <color name="navigationBarColor">#5D4037</color>
+    <color name="colorAccent">#FF5722</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="snackbar_bg">#323232</color>
+    <color name="snackbar_transparent_stroke">#00ffffff</color>
+</resources>

@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_local"
+        android:title="@string/local"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_bookmark"
+        android:title="@string/bookmark"
+        android:icon="@drawable/ic_hezb"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_tafseer"
+        android:title="@string/tafseer"
+        android:icon="@drawable/ic_hezb"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_tafseer2"
+        android:title="@string/tafseer2"
+        android:icon="@drawable/ic_hezb"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/change_image_size"
+        android:title="@string/change_image_size"
+        android:icon="@drawable/ic_hezb"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/about_the_developer"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_hezb"
+        app:showAsAction="always" />
+</menu>

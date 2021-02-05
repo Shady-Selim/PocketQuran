@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        applicationId "com.Shady_Selim.Quran"
+        minSdkVersion 17
+        targetSdkVersion 30
+        versionCode 11
+        versionName "2.1.2"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation "com.google.android.material:material:1.2.1"
+    implementation 'com.github.clans:fab:1.6.4'
+    implementation 'com.google.firebase:firebase-messaging:21.0.1'
+}

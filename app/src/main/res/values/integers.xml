@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="pagesCount">522</integer>
+    <integer name="pagesLeading">0</integer>
+    <integer name="lastPage">522</integer>
+</resources>
