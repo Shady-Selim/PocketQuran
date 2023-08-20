@@ -1,0 +1,13 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".MainActivity$DummySectionFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    <ImageView
+            android:id="@+id/imageQuran"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/Quran_Page"
+            android:scaleType="fitCenter"
+            android:src="@drawable/q1" />
+</ScrollView>

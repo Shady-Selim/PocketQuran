@@ -145,4 +145,5 @@
     <string name="tafseer">Tafseer Hezb</string>
     <string name="tafseer2">Tafseer Hezb 2</string>
     <string name="change_image_size">Change Page Size</string>
+    <string name="change_color">Change Color (Dark-Light mode)</string>
 </resources>

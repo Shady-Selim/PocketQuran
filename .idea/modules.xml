@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/PocketQuran.iml" filepath="$PROJECT_DIR$/.idea/modules/PocketQuran.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PocketQuran.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PocketQuran.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PocketQuran.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PocketQuran.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PocketQuran.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PocketQuran.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PocketQuran.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PocketQuran.app.unitTest.iml" />
     </modules>
   </component>
 </project>

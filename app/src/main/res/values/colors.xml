@@ -5,6 +5,6 @@
     <color name="navigationBarColor">#5D4037</color>
     <color name="colorAccent">#FF5722</color>
     <color name="divider">#BDBDBD</color>
-    <color name="snackbar_bg">#323232</color>
+    <color name="snackbar_bg">#A6323232</color>
     <color name="snackbar_transparent_stroke">#00ffffff</color>
 </resources>

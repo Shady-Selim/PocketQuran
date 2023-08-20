@@ -9,6 +9,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.content.res.Configuration
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.net.Uri
 import android.os.Bundle
 
@@ -24,10 +26,6 @@ import com.Shady_Selim.Quran.R.id.*
 
 import com.github.clans.fab.FloatingActionButton
 import com.github.clans.fab.FloatingActionMenu
-
-import java.util.ArrayList
-import java.util.HashSet
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -72,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         mViewPager.currentItem = prefs.getInt("LastPage", pagesCount)
         setMark = prefs.getStringSet("Bookmarks", HashSet())
         fullScreen = prefs.getBoolean("FullScreen", false)
+        invertColor = prefs.getBoolean("InvertColor", false)
 
         info =  findViewById(R.id.info)
 
@@ -86,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         bookmarkImg = findViewById(bookmark)
         bookmarkImg.visibility = View.GONE
         mFab = findViewById(fab)
+        getBookmark()
     }
 
     override fun onStop() {
@@ -127,6 +127,7 @@ class MainActivity : AppCompatActivity() {
         menu?.add(0, action_tafseer, 0, getString(R.string.tafseer))
         menu?.add(0, action_tafseer2, 0, getString(R.string.tafseer2))
         menu?.add(0, change_image_size, 0, getString(R.string.change_image_size))
+        menu?.add(0, invert_color, 0, getString(R.string.change_color))
         menu?.add(0, action_about, 0, getString(R.string.about_the_developer))
     }
 
@@ -228,17 +229,28 @@ class MainActivity : AppCompatActivity() {
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false)
-            val mViewPager = container?.findViewById<View>(pager) as ViewPager
             val img: ImageView = rootView.findViewById(imageQuran)
-            val currentPage: Int = this.resources.getInteger(R.integer.pagesCount) - arguments!!.getInt(ARG_SECTION_NUMBER) + 1
-            img.setImageResource(rootView.resources.getIdentifier("q$currentPage", "drawable", rootView.context.packageName))
+            val currentPage: Int = resources.getInteger(R.integer.pagesCount) - requireArguments().getInt(ARG_SECTION_NUMBER) + 1
+            img.setImageResource(resources.getIdentifier("q$currentPage", "drawable", rootView.context.packageName))
             img.setOnClickListener {
-                mViewPager.currentItem = mViewPager.currentItem - 1
                 mFab!!.close(true)
             }
             img.scaleType = when {
                 fullScreen -> ImageView.ScaleType.FIT_XY
                 else -> ImageView.ScaleType.FIT_START
+            }
+
+            if (invertColor) {
+                val matrix = ColorMatrix()
+                matrix.set(
+                    floatArrayOf(
+                        -1f, 0f, 0f, 0f, 255f,
+                        0f, -1f, 0f, 0f, 255f,
+                        0f, 0f, -1f, 0f, 255f,
+                        0f, 0f, 0f, 1f, 0f
+                    )
+                )
+                img.colorFilter = ColorMatrixColorFilter(matrix)
             }
             registerForContextMenu(img)
             return rootView
@@ -258,7 +270,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("ValidFragment")
     class SelectSurah(private val mViewPager: ViewPager, private val pagesCount: Int) : androidx.fragment.app.DialogFragment() {
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             val surahItems = ArrayList<String>()
@@ -278,7 +289,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("ValidFragment")
     class SelectHezb(private val mViewPager: ViewPager, private val pagesCount: Int, private val hezPart: Array<String>) : androidx.fragment.app.DialogFragment() {
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             val page: IntArray = resources.getIntArray(R.array.hezb)
@@ -298,7 +308,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("ValidFragment")
     class SelectJuz(private val mViewPager: ViewPager, private val pagesCount: Int) : androidx.fragment.app.DialogFragment() {
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             val juzItems = ArrayList<String>()
@@ -320,7 +329,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("ValidFragment")
     class SelectBookmark(private val mViewPager: ViewPager, private val pagesCount: Int, private val setMark: MutableSet<String>?) : androidx.fragment.app.DialogFragment() {
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             var k = 0
@@ -389,6 +397,12 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
                 return true
             }
+            invert_color -> {
+                prefs.edit().putInt("LastPage", mViewPager.currentItem)
+                    .putBoolean("InvertColor", !invertColor).apply()
+                startActivity(Intent(this, MainActivity::class.java))
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
@@ -413,6 +427,7 @@ class MainActivity : AppCompatActivity() {
         var currentSurahIndex: Int = 1
         var currentHezbAyah: Int = 1
         var fullScreen: Boolean = false
+        var invertColor: Boolean = false
 
         private var mFab: FloatingActionMenu? = null
 
