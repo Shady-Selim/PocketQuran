@@ -146,4 +146,5 @@
     <string name="tafseer2">Tafseer Hezb 2</string>
     <string name="change_image_size">Change Page Size</string>
     <string name="change_color">Change Color (Dark-Light mode)</string>
+    <string name="dis_allow_click_to_forward">Dis/Allow Click to Forward</string>
 </resources>

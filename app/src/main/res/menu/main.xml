@@ -7,32 +7,29 @@
     <item
             android:id="@+id/action_bookmark"
             android:title="@string/bookmark"
-            android:icon="@drawable/ic_hezb"
             app:showAsAction="always" />
     <item
             android:id="@+id/action_tafseer"
             android:title="@string/tafseer"
-            android:icon="@drawable/ic_hezb"
             app:showAsAction="always" />
     <item
             android:id="@+id/action_tafseer2"
             android:title="@string/tafseer2"
-            android:icon="@drawable/ic_hezb"
             app:showAsAction="always" />
     <item
             android:id="@+id/change_image_size"
             android:title="@string/change_image_size"
-            android:icon="@drawable/ic_hezb"
             app:showAsAction="always" />
     <item
             android:id="@+id/invert_color"
             android:title="@string/change_color"
-            android:icon="@drawable/ic_hezb"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/dis_allow_click_to_forward"
+            android:title="@string/dis_allow_click_to_forward"
             app:showAsAction="always" />
     <item
             android:id="@+id/action_about"
             android:title="@string/about_the_developer"
-            android:orderInCategory="100"
-            android:icon="@drawable/ic_hezb"
             app:showAsAction="always" />
 </menu>

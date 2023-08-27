@@ -145,4 +145,5 @@
     <string name="tafseer2">تفسير حزب 2</string>
     <string name="change_image_size">تغيير حجم الصفحة</string>
     <string name="change_color">تغيير اللون (فاتح-غامق)</string>
+    <string name="dis_allow_click_to_forward">عدم/السماح بالنقر للاستمرار</string>
 </resources>

@@ -2,7 +2,6 @@ package com.Shady_Selim.Quran
 
 import java.util.Locale
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
@@ -71,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         setMark = prefs.getStringSet("Bookmarks", HashSet())
         fullScreen = prefs.getBoolean("FullScreen", false)
         invertColor = prefs.getBoolean("InvertColor", false)
+        allowClickToNextSlide = prefs.getBoolean("AllowClickToNextSlide", false)
 
         info =  findViewById(R.id.info)
 
@@ -128,6 +128,7 @@ class MainActivity : AppCompatActivity() {
         menu?.add(0, action_tafseer2, 0, getString(R.string.tafseer2))
         menu?.add(0, change_image_size, 0, getString(R.string.change_image_size))
         menu?.add(0, invert_color, 0, getString(R.string.change_color))
+        menu?.add(0, dis_allow_click_to_forward, 0, getString(R.string.dis_allow_click_to_forward))
         menu?.add(0, action_about, 0, getString(R.string.about_the_developer))
     }
 
@@ -229,11 +230,14 @@ class MainActivity : AppCompatActivity() {
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val rootView = inflater.inflate(R.layout.fragment_main_dummy, container, false)
+            val mViewPager = container?.findViewById<View>(pager) as ViewPager
             val img: ImageView = rootView.findViewById(imageQuran)
             val currentPage: Int = resources.getInteger(R.integer.pagesCount) - requireArguments().getInt(ARG_SECTION_NUMBER) + 1
             img.setImageResource(resources.getIdentifier("q$currentPage", "drawable", rootView.context.packageName))
             img.setOnClickListener {
-                mFab!!.close(true)
+                if(allowClickToNextSlide)
+                    mViewPager.currentItem = mViewPager.currentItem - 1
+                mFab?.close(true)
             }
             img.scaleType = when {
                 fullScreen -> ImageView.ScaleType.FIT_XY
@@ -403,6 +407,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
                 return true
             }
+            dis_allow_click_to_forward -> {
+                prefs.edit().putBoolean("AllowClickToNextSlide", !allowClickToNextSlide).apply()
+                allowClickToNextSlide = !allowClickToNextSlide
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
@@ -428,6 +437,7 @@ class MainActivity : AppCompatActivity() {
         var currentHezbAyah: Int = 1
         var fullScreen: Boolean = false
         var invertColor: Boolean = false
+        var allowClickToNextSlide: Boolean = false
 
         private var mFab: FloatingActionMenu? = null
 
